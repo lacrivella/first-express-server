@@ -17,7 +17,7 @@ describe('items routes', () => {
       });
   }); 
 
-  it('can getan array of birds with GET', () => {
+  it('can get an array of birds with GET', () => {
     return request(app)
       .get('/api/v1/birds')
       .then(res => {
@@ -29,6 +29,17 @@ describe('items routes', () => {
       });
   });
 
+  it('can find a bird by id/index', () => {
+    return request(app)
+    .get('/api/v1/birds/0')
+    .then(res => {
+      expect(res.body).toEqual({
+        type: 'bluejay',
+        family: 'corvidae',
+        color: 'blue'
+      });
+    });
+  });
 
-  
+
 });
