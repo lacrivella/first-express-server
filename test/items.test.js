@@ -57,6 +57,17 @@ describe('items routes', () => {
         color: 'brown not green'
       });
     });
-  })
-  
+  });
+
+  it('deletes a bird by index', () => {
+    return request(app)
+      .delete('/api/v1/birds/0')
+      .then(res => {
+        expect(res.body).toEqual({
+          type: 'kiwi',
+          family: 'apterygidae',
+          color: 'brown not green'
+      });
+    });
+  });
 });
