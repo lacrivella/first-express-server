@@ -4,9 +4,10 @@ const app = require('../lib/app');
 //REMEMBER CRUD -- CREATE READ UPDATE DELETE
 
 describe('items routes', () => {
+  const pathWay = '/api/v1/birds';
   it('create a bird with POST', () => {
     return request(app)
-      .post('/api/v1/birds')
+      .post(pathWay)
       .send({ type: 'bluejay', family: 'corvidae', color: 'blue'})
       .then(res => {
         expect(res.body).toEqual({
@@ -19,7 +20,7 @@ describe('items routes', () => {
 
   it('can get an array of birds with GET', () => {
     return request(app)
-      .get('/api/v1/birds')
+      .get(pathWay)
       .then(res => {
         expect(res.body).toEqual([{
           type: 'bluejay',
@@ -31,7 +32,7 @@ describe('items routes', () => {
 
   it('can find a bird by id/index', () => {
     return request(app)
-    .get('/api/v1/birds/0')
+    .get(`${pathWay}/0`)
     .then(res => {
       expect(res.body).toEqual({
         type: 'bluejay',
@@ -48,7 +49,7 @@ describe('items routes', () => {
       color: 'brown not green'
     };
     return request(app)
-    .put('/api/v1/birds/0')
+    .put(`${pathWay}/0`)
     .send(newBird)
     .then(res => {
       expect(res.body).toEqual({
@@ -61,7 +62,7 @@ describe('items routes', () => {
 
   it('deletes a bird by index', () => {
     return request(app)
-      .delete('/api/v1/birds/0')
+      .delete(`${pathWay}/0`)
       .then(res => {
         expect(res.body).toEqual({
           type: 'kiwi',
