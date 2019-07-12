@@ -41,5 +41,22 @@ describe('items routes', () => {
     });
   });
 
-
+  it('can update the list with PUT', () =>{
+    const newBird = {
+      type: 'kiwi',
+      family: 'apterygidae',
+      color: 'brown not green'
+    };
+    return request(app)
+    .put('/api/v1/birds/0')
+    .send(newBird)
+    .then(res => {
+      expect(res.body).toEqual({
+        type: 'kiwi',
+        family: 'apterygidae',
+        color: 'brown not green'
+      });
+    });
+  })
+  
 });
